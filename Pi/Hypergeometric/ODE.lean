@@ -67,4 +67,10 @@ theorem hypergeometric₃F₂_hasSum
   have := (hypergeometric₃F₂_hasFPowerSeriesOnBall 𝔸 a b c d e h).hasSum hmem
   simpa only [hypergeometric₃F₂Series_apply_eq, zero_add] using this
 
+/-- `₃F₂` is analytic on the open unit ball. -/
+theorem hypergeometric₃F₂_analyticOnNhd
+    (h : ∀ kn : ℕ, ↑kn ≠ -a ∧ ↑kn ≠ -b ∧ ↑kn ≠ -c ∧ ↑kn ≠ -d ∧ ↑kn ≠ -e) :
+    AnalyticOnNhd 𝕂 (₃F₂ a b c d e) (Metric.eball (0 : 𝔸) 1) := fun _ hy ↦
+  (hypergeometric₃F₂_hasFPowerSeriesOnBall 𝔸 a b c d e h).analyticAt_of_mem hy
+
 end RCLike
